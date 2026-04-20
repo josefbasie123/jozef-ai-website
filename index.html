@@ -1,0 +1,1174 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Jozef AI — Your workflow. One smart system.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<script>
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "accent": "#f0a060",
+  "mood": "golden",
+  "headline": "Your workflow.|One golden system."
+}/*EDITMODE-END*/;
+</script>
+<style>
+  :root {
+    --accent: #e8b24a;
+    --gold-1: #f7d77a;
+    --gold-2: #e8b24a;
+    --gold-3: #a06a1f;
+    --bg-0: #1a1105;
+    --bg-1: #221708;
+    --bg-2: #2c1d0b;
+    --line: rgba(255, 215, 150, 0.10);
+    --line-2: rgba(255, 215, 150, 0.20);
+    --ink: #fbf0d4;
+    --ink-2: #d6bf90;
+    --ink-3: #97835f;
+    --sans: "Inter", -apple-system, Segoe UI, sans-serif;
+    --serif: "Instrument Serif", Georgia, serif;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+  [data-mood="dusk"] {
+    --accent: #f0a060; --gold-1: #ffc48a; --gold-2: #f0a060; --gold-3: #8a3f16;
+    --bg-0: #1b0d08; --bg-1: #23120b; --bg-2: #2c170d;
+    --ink: #fbe6d0;
+  }
+  [data-mood="sage"] {
+    --accent: #c9b872; --gold-1: #ddd09a; --gold-2: #c9b872; --gold-3: #6b6027;
+    --bg-0: #121510; --bg-1: #1a1e16; --bg-2: #23271c;
+    --ink: #ece7cf; --ink-2: #b8b48d; --ink-3: #7f7c5d;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg-0);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  ::selection { background: var(--accent); color: #1a1105; }
+  a { color: inherit; text-decoration: none; }
+  button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+
+  .wrap { max-width: 1360px; margin: 0 auto; padding: 0 40px; position: relative; }
+  @media (max-width: 720px) { .wrap { padding: 0 20px; } }
+
+  /* ——————————————— MISTY FOREST BACKGROUND + ANIMATED MIST */
+  .bg-photo {
+    position: fixed; inset: -6%; z-index: 0; pointer-events: none;
+    background-image: url("https://images.unsplash.com/photo-1511497584788-876760111969?auto=format&fit=crop&w=2400&q=80");
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.48) contrast(1.15) saturate(0.85) hue-rotate(-5deg);
+    animation: bgdrift 40s ease-in-out infinite alternate;
+    will-change: transform;
+  }
+  @keyframes bgdrift {
+    0%   { transform: scale(1.08) translate(-1%, 0.5%); }
+    100% { transform: scale(1.14) translate(1.5%, -1%); }
+  }
+  .mist-layer {
+    position: fixed; inset: -20%; z-index: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 60% 30% at 20% 70%, rgba(230, 220, 200, 0.18) 0%, transparent 60%),
+      radial-gradient(ellipse 80% 25% at 70% 40%, rgba(220, 210, 190, 0.14) 0%, transparent 65%),
+      radial-gradient(ellipse 50% 20% at 90% 80%, rgba(230, 220, 200, 0.16) 0%, transparent 55%);
+    mix-blend-mode: screen;
+    animation: mistdrift1 32s linear infinite;
+    will-change: transform;
+  }
+  .mist-layer.b {
+    background:
+      radial-gradient(ellipse 70% 25% at 50% 30%, rgba(240, 230, 210, 0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 18% at 15% 50%, rgba(220, 210, 195, 0.14) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 22% at 85% 65%, rgba(230, 220, 200, 0.10) 0%, transparent 60%);
+    animation: mistdrift2 48s linear infinite;
+    opacity: 0.8;
+  }
+  @keyframes mistdrift1 {
+    0%   { transform: translate3d(-6%, 0, 0); }
+    100% { transform: translate3d(6%, -2%, 0); }
+  }
+  @keyframes mistdrift2 {
+    0%   { transform: translate3d(8%, 1%, 0); }
+    100% { transform: translate3d(-8%, -1%, 0); }
+  }
+  .bg-video { display: none; }
+  .bg-tint {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 90% 60% at 50% 0%, rgba(120, 90, 200, 0.18) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 50% at 80% 30%, rgba(60, 140, 200, 0.15) 0%, transparent 60%),
+      linear-gradient(180deg, rgba(5,5,15,0.35) 0%, rgba(3,3,10,0.5) 60%, rgba(0,0,5,0.7) 100%);
+  }
+  .bg-vignette {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background: radial-gradient(ellipse 85% 75% at 50% 50%, transparent 35%, rgba(0,0,0,0.75) 100%);
+  }
+  .sky { display: none; }
+  .sun {
+    position: fixed; left: 50%; top: 10%;
+    transform: translate(-50%, -50%);
+    width: 700px; height: 700px;
+    z-index: 0; pointer-events: none;
+    background: radial-gradient(circle,
+      color-mix(in oklab, var(--gold-1) 45%, transparent) 0%,
+      color-mix(in oklab, var(--gold-2) 22%, transparent) 25%,
+      transparent 65%);
+    filter: blur(18px);
+    animation: breathe 11s ease-in-out infinite;
+    mix-blend-mode: screen;
+  }
+  @keyframes breathe {
+    0%, 100% { opacity: 0.85; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 1; transform: translate(-50%, -50%) scale(1.06); }
+  }
+
+  .cliffs { display: none; }
+
+  .falls { display: none; }
+  .basin { display: none; }
+  .sun { display: none; }
+  .fall-stream {
+    position: absolute; top: -20%;
+    width: 100%; height: 140%;
+    background-image:
+      linear-gradient(180deg,
+        transparent 0%,
+        rgba(255,240,210,0.00) 8%,
+        rgba(255,240,210,0.18) 15%,
+        rgba(255,230,180,0.22) 40%,
+        rgba(255,220,160,0.18) 70%,
+        rgba(255,210,140,0.05) 95%,
+        transparent 100%),
+      repeating-linear-gradient(180deg,
+        rgba(255,245,220,0.00) 0px,
+        rgba(255,245,220,0.00) 6px,
+        rgba(255,245,220,0.18) 7px,
+        rgba(255,245,220,0.00) 14px),
+      repeating-linear-gradient(180deg,
+        rgba(255,230,180,0.00) 0px,
+        rgba(255,230,180,0.00) 14px,
+        rgba(255,230,180,0.14) 16px,
+        rgba(255,230,180,0.00) 28px);
+    background-size: 100% 100%, 100% 120px, 100% 240px;
+    animation: waterfall 2.2s linear infinite;
+    filter: blur(0.6px);
+    opacity: 0.85;
+  }
+  .fall-stream.b {
+    animation-duration: 3.6s;
+    opacity: 0.55;
+    filter: blur(2.5px);
+    transform: scaleX(1.2);
+  }
+  .fall-stream.c {
+    animation-duration: 1.6s;
+    opacity: 0.4;
+    filter: blur(0.2px);
+    background-image: repeating-linear-gradient(180deg,
+      rgba(255,250,230,0) 0px,
+      rgba(255,250,230,0) 30px,
+      rgba(255,250,230,0.35) 32px,
+      rgba(255,250,230,0) 60px);
+    background-size: 100% 90px;
+  }
+  @keyframes waterfall {
+    0% { background-position: 0 0, 0 0, 0 0; }
+    100% { background-position: 0 0, 0 120px, 0 240px; }
+  }
+
+  .fall-glow { display: none; }
+
+  /* Rising mist at the base of the falls */
+  .basin {
+    position: fixed; left: 0; right: 0; bottom: 0;
+    height: 42vh; z-index: 0; pointer-events: none;
+    overflow: hidden;
+  }
+  .mist-cloud {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle at 50% 50%,
+      rgba(255,230,190,0.55) 0%,
+      rgba(255,220,170,0.28) 40%,
+      transparent 70%);
+    filter: blur(30px);
+    mix-blend-mode: screen;
+    animation: rise linear infinite;
+  }
+  @keyframes rise {
+    0%   { transform: translate(var(--x, 0), 100%) scale(0.6); opacity: 0; }
+    15%  { opacity: 0.9; }
+    85%  { opacity: 0.5; }
+    100% { transform: translate(calc(var(--x, 0) + var(--drift, 0)), -30%) scale(1.6); opacity: 0; }
+  }
+
+  /* Horizontal mist bands drifting across the page */
+  .mist {
+    position: fixed; left: -20%; right: -20%;
+    height: 260px;
+    z-index: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 40% 100% at 20% 50%, rgba(255,225,175,0.18), transparent 70%),
+      radial-gradient(ellipse 50% 100% at 55% 50%, rgba(255,225,175,0.12), transparent 70%),
+      radial-gradient(ellipse 35% 100% at 85% 50%, rgba(255,225,175,0.16), transparent 70%);
+    filter: blur(22px);
+    animation: drift 50s linear infinite;
+    mix-blend-mode: screen;
+  }
+  .mist-1 { top: 22vh; animation-duration: 60s; opacity: 0.85; }
+  .mist-2 { top: 50vh; animation-duration: 80s; animation-direction: reverse; opacity: 0.65; }
+  @keyframes drift {
+    0% { transform: translateX(-10%); }
+    100% { transform: translateX(10%); }
+  }
+
+  .grain {
+    position: fixed; inset: 0; z-index: 1; pointer-events: none;
+    opacity: 0.045; mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence baseFrequency='0.9' numOctaves='2' seed='5'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+
+  main, header, footer { position: relative; z-index: 2; }
+
+  /* ——————————————— NAV */
+  .nav {
+    position: sticky; top: 20px; z-index: 40;
+    margin: 20px 20px 0;
+  }
+  .nav-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 14px 10px 18px;
+    border-radius: 999px;
+    background: rgba(30, 20, 8, 0.45);
+    border: 1px solid var(--line-2);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 10px 40px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,220,160,.12);
+  }
+  .brand {
+    display: flex; align-items: center; gap: 10px;
+    font-weight: 600; font-size: 15px; letter-spacing: -0.01em; color: var(--ink);
+  }
+  .brand-mark {
+    width: 22px; height: 22px; border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #fff6d8 0%, var(--gold-1) 30%, var(--gold-2) 60%, var(--gold-3) 100%);
+    box-shadow: 0 0 24px color-mix(in oklab, var(--gold-1) 60%, transparent);
+  }
+  .nav-links {
+    display: flex; gap: 4px;
+    background: rgba(255,220,160,0.04);
+    border-radius: 999px; padding: 4px;
+  }
+  .nav-links a {
+    font-size: 13.5px; color: var(--ink-2);
+    padding: 7px 14px; border-radius: 999px;
+    transition: background .18s, color .18s;
+  }
+  .nav-links a:hover { color: var(--ink); background: rgba(255,220,160,0.06); }
+  .nav-links a.active { color: var(--ink); background: rgba(255,220,160,0.10); }
+
+  .nav-cta {
+    font-size: 13.5px; font-weight: 500;
+    padding: 9px 18px; border-radius: 999px;
+    color: #2a1a08;
+    background: linear-gradient(180deg, #fff1c5 0%, var(--gold-1) 40%, var(--gold-2) 100%);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.7),
+      inset 0 -8px 12px rgba(160, 100, 30, .35),
+      0 12px 30px color-mix(in oklab, var(--gold-2) 45%, transparent),
+      0 0 0 1px rgba(255,255,255,.15);
+    transition: transform .15s;
+  }
+  .nav-cta:hover { transform: translateY(-1px); }
+  @media (max-width: 860px) { .nav-links { display: none; } }
+
+  /* ——————————————— HERO */
+  .hero { padding: 90px 0 140px; position: relative; min-height: 82vh; }
+  .hero-kicker {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: var(--mono); font-size: 11.5px; color: var(--ink-2);
+    padding: 6px 14px 6px 10px;
+    border-radius: 999px;
+    background: rgba(255,220,160,0.05);
+    border: 1px solid var(--line-2);
+    letter-spacing: 0.02em;
+  }
+  .hero-kicker .pulse {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 4px color-mix(in oklab, var(--accent) 22%, transparent);
+    animation: pulse 2.2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%,100% { box-shadow: 0 0 0 3px color-mix(in oklab, var(--accent) 22%, transparent); }
+    50% { box-shadow: 0 0 0 8px color-mix(in oklab, var(--accent) 0%, transparent); }
+  }
+
+  .hero h1 {
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: clamp(54px, 9vw, 128px);
+    line-height: 0.98;
+    letter-spacing: -0.04em;
+    margin: 28px 0 0;
+    max-width: 14ch;
+    text-wrap: balance;
+    color: var(--ink);
+  }
+  .hero h1 .serif {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    background: linear-gradient(180deg, #fff3cc 0%, var(--gold-1) 50%, var(--gold-2) 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    padding-right: 0.05em;
+    filter: drop-shadow(0 4px 20px color-mix(in oklab, var(--gold-1) 45%, transparent));
+  }
+  .hero-sub {
+    margin-top: 32px; max-width: 54ch;
+    font-size: 17px; line-height: 1.6; color: var(--ink-2);
+    text-wrap: pretty;
+  }
+
+  .hero-cta-row {
+    margin-top: 40px;
+    display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+  }
+  .btn-glossy {
+    font-size: 14px; font-weight: 500;
+    padding: 15px 26px; border-radius: 999px;
+    color: #2a1a08;
+    background: linear-gradient(180deg, #fff3cc 0%, var(--gold-1) 40%, var(--gold-2) 100%);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.7),
+      inset 0 -12px 16px rgba(140, 85, 25, .4),
+      0 14px 40px color-mix(in oklab, var(--gold-2) 45%, transparent),
+      0 0 0 1px rgba(255,255,255,.18);
+    display: inline-flex; align-items: center; gap: 10px;
+    transition: transform .15s;
+  }
+  .btn-glossy:hover { transform: translateY(-1px); }
+  .btn-ghost {
+    font-size: 14px; font-weight: 500;
+    padding: 15px 22px; border-radius: 999px;
+    color: var(--ink);
+    background: rgba(255,220,160,0.04);
+    border: 1px solid var(--line-2);
+    display: inline-flex; align-items: center; gap: 10px;
+  }
+  .btn-ghost:hover { background: rgba(255,220,160,0.08); border-color: var(--ink-3); }
+  .btn .arrow { transition: transform .2s; }
+  .btn:hover .arrow { transform: translateX(3px); }
+
+  .hero-meta {
+    margin-top: 90px;
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    overflow: hidden;
+    backdrop-filter: blur(14px);
+  }
+  .hero-meta .cell {
+    background: rgba(30, 20, 8, 0.45);
+    padding: 24px 22px;
+  }
+  .hero-meta .cell .label {
+    font-family: var(--mono); font-size: 10.5px; color: var(--ink-3);
+    text-transform: uppercase; letter-spacing: 0.1em;
+  }
+  .hero-meta .cell .val {
+    font-family: var(--sans); font-weight: 400;
+    font-size: 30px; color: var(--ink);
+    margin-top: 10px; letter-spacing: -0.03em;
+    font-feature-settings: "tnum";
+  }
+  .hero-meta .cell .val .unit {
+    color: var(--ink-3); font-size: 16px; margin-left: 2px;
+  }
+  @media (max-width: 860px) { .hero-meta { grid-template-columns: 1fr 1fr; } }
+
+  /* ——————————————— LOGO STRIP */
+  .logostrip {
+    padding: 40px 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    background: rgba(20, 13, 5, 0.3);
+    backdrop-filter: blur(10px);
+    text-align: center;
+  }
+  .logostrip .label {
+    font-family: var(--mono); font-size: 11px; color: var(--ink-3);
+    letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 24px;
+  }
+  .logostrip-logos {
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 32px; flex-wrap: wrap;
+    opacity: 0.85;
+  }
+  .logostrip-logos .logo { font-family: var(--serif); font-style: italic; font-size: 22px; color: var(--ink-2); }
+  .logostrip-logos .logo.sans { font-family: var(--sans); font-style: normal; font-weight: 600; letter-spacing: 0.08em; font-size: 17px; }
+  .logostrip-logos .logo.mono { font-family: var(--mono); font-size: 15px; letter-spacing: -0.02em; }
+
+  /* ——————————————— SECTION */
+  section { padding: 130px 0; position: relative; }
+  section.bordered { border-top: 1px solid var(--line); }
+  .sec-head {
+    display: grid; grid-template-columns: 220px 1fr; gap: 48px;
+    margin-bottom: 72px; align-items: baseline;
+  }
+  .sec-label {
+    font-family: var(--mono); font-size: 11.5px; color: var(--accent);
+    text-transform: uppercase; letter-spacing: 0.14em;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .sec-label::before {
+    content: ""; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 12px var(--accent);
+  }
+  .sec-title {
+    font-family: var(--sans); font-weight: 300;
+    font-size: clamp(34px, 5vw, 64px);
+    line-height: 1.05; letter-spacing: -0.03em;
+    margin: 0; max-width: 22ch; text-wrap: balance;
+    color: var(--ink);
+  }
+  .sec-title em {
+    font-family: var(--serif); font-style: italic; font-weight: 400;
+    background: linear-gradient(180deg, #fff3cc 0%, var(--gold-1) 50%, var(--gold-2) 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  @media (max-width: 860px) { .sec-head { grid-template-columns: 1fr; gap: 14px; margin-bottom: 44px; } }
+
+  /* ——————————————— SERVICES */
+  .services {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: 20px; overflow: hidden;
+    backdrop-filter: blur(14px);
+  }
+  .service {
+    background: rgba(30, 20, 8, 0.45);
+    padding: 40px 32px 36px;
+    transition: background .25s;
+  }
+  .service:hover { background: rgba(50, 34, 14, 0.6); }
+  .service-num { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 0.1em; }
+  .service h3 {
+    font-family: var(--sans); font-weight: 400;
+    font-size: 24px; letter-spacing: -0.02em;
+    margin: 18px 0 12px; color: var(--ink);
+  }
+  .service h3 em { font-family: var(--serif); font-style: italic; color: var(--gold-1); }
+  .service p { color: var(--ink-2); font-size: 14.5px; line-height: 1.6; margin: 0; }
+  .service ul {
+    margin: 22px 0 0; padding: 0; list-style: none;
+    font-family: var(--mono); font-size: 11.5px; color: var(--ink-3);
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .service ul li::before { content: "— "; color: var(--accent); }
+  @media (max-width: 960px) { .services { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 640px) { .services { grid-template-columns: 1fr; } }
+
+  /* ——————————————— WORK */
+  .work-list {
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .work-row {
+    display: grid;
+    grid-template-columns: 56px 1fr 1fr 170px 40px;
+    align-items: center;
+    padding: 28px 0;
+    border-bottom: 1px solid var(--line);
+    cursor: pointer;
+    transition: padding .25s, background .25s;
+  }
+  .work-row:last-child { border-bottom: 0; }
+  .work-row:hover {
+    padding-left: 20px; padding-right: 20px;
+    background: linear-gradient(90deg, transparent, rgba(232,178,74,0.06), transparent);
+  }
+  .work-row:hover .work-title .serif { color: var(--gold-1); }
+  .work-num { font-family: var(--mono); font-size: 11.5px; color: var(--ink-3); letter-spacing: 0.08em; }
+  .work-title { font-family: var(--sans); font-weight: 400; font-size: 26px; letter-spacing: -0.02em; color: var(--ink); }
+  .work-title .serif { font-family: var(--serif); font-style: italic; color: var(--gold-2); transition: color .25s; }
+  .work-desc { color: var(--ink-2); font-size: 14px; max-width: 46ch; }
+  .work-tag { font-family: var(--mono); font-size: 10.5px; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.1em; justify-self: end; }
+  .work-arrow { font-family: var(--mono); color: var(--ink-3); justify-self: end; transition: transform .2s, color .2s; font-size: 18px; }
+  .work-row:hover .work-arrow { transform: translate(3px, -3px); color: var(--gold-1); }
+  @media (max-width: 860px) {
+    .work-row { grid-template-columns: 40px 1fr 40px; gap: 12px; }
+    .work-desc, .work-tag { display: none; }
+    .work-title { font-size: 19px; }
+  }
+  .work-preview {
+    position: fixed; pointer-events: none;
+    width: 320px; height: 210px;
+    border-radius: 14px; border: 1px solid var(--line-2);
+    z-index: 50; opacity: 0; transform: scale(0.95);
+    transition: opacity .2s, transform .2s;
+    overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0,0,0,.6);
+  }
+  .work-preview.show { opacity: 1; transform: scale(1); }
+  .work-preview .ph {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--mono); font-size: 10.5px; color: var(--ink);
+    background:
+      radial-gradient(ellipse at 50% 100%, color-mix(in oklab, var(--gold-3) 60%, transparent), transparent 60%),
+      radial-gradient(ellipse at 50% 10%, color-mix(in oklab, var(--gold-1) 40%, transparent), transparent 60%),
+      #2a1a08;
+    letter-spacing: 0.08em;
+  }
+
+  /* ——————————————— PROCESS */
+  .process { display: grid; grid-template-columns: 1.1fr 1fr; gap: 64px; align-items: start; }
+  .step {
+    padding: 28px 0;
+    border-top: 1px solid var(--line);
+    display: grid; grid-template-columns: 64px 1fr; gap: 20px;
+  }
+  .step:last-child { border-bottom: 1px solid var(--line); }
+  .step-num { font-family: var(--mono); font-size: 11.5px; color: var(--ink-3); letter-spacing: 0.08em; }
+  .step h4 { font-family: var(--sans); font-weight: 400; font-size: 20px; letter-spacing: -0.015em; margin: 0 0 8px; color: var(--ink); }
+  .step h4 em { font-family: var(--serif); font-style: italic; color: var(--gold-1); }
+  .step p { margin: 0; color: var(--ink-2); font-size: 14.5px; line-height: 1.6; max-width: 52ch; }
+  .step-time { font-family: var(--mono); font-size: 11px; color: var(--accent); margin-top: 12px; letter-spacing: 0.08em; }
+
+  .console {
+    position: sticky; top: 110px;
+    background: linear-gradient(180deg, rgba(40, 26, 10, 0.65), rgba(20, 13, 5, 0.85));
+    border: 1px solid var(--line-2);
+    border-radius: 18px;
+    overflow: hidden;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 30px 80px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,220,160,.08);
+  }
+  .console-bar {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--line);
+    display: flex; align-items: center; gap: 8px;
+    font-family: var(--mono); font-size: 11px; color: var(--ink-3);
+  }
+  .console-bar .bulb { width: 9px; height: 9px; border-radius: 50%; background: rgba(255,220,160,0.14); }
+  .console-bar .bulb:nth-child(3) { background: var(--accent); box-shadow: 0 0 10px var(--accent); }
+  .console-bar .title { margin-left: 10px; }
+  .console-body {
+    padding: 22px 22px 26px;
+    font-family: var(--mono); font-size: 12.5px; line-height: 1.75; color: var(--ink-2);
+  }
+  .console-body .prompt { color: var(--accent); }
+  .console-body .hi { color: var(--ink); }
+  .console-body .muted { color: var(--ink-3); }
+  .console-body .ok { color: #d9e080; }
+  .console-cursor { display: inline-block; width: 8px; height: 14px; background: var(--accent); vertical-align: -2px; animation: blink 1s steps(1) infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+  @media (max-width: 960px) { .process { grid-template-columns: 1fr; gap: 32px; } .console { position: static; } }
+
+  /* ——————————————— PROOF */
+  .proof {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: 20px; overflow: hidden;
+    backdrop-filter: blur(14px);
+  }
+  .proof-cell { background: rgba(30, 20, 8, 0.45); padding: 44px 38px; }
+  .proof-cell .big {
+    font-family: var(--sans); font-weight: 300;
+    font-size: clamp(52px, 6vw, 88px);
+    letter-spacing: -0.04em; line-height: 1; color: var(--ink);
+    font-feature-settings: "tnum";
+  }
+  .proof-cell .big .unit {
+    font-family: var(--serif); font-style: italic; font-weight: 400;
+    background: linear-gradient(180deg, #fff3cc 0%, var(--gold-1) 50%, var(--gold-2) 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .proof-cell .label { font-family: var(--mono); font-size: 11px; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 20px; }
+  .proof-cell .desc { color: var(--ink-2); font-size: 14.5px; margin-top: 12px; max-width: 46ch; line-height: 1.6; }
+  @media (max-width: 720px) { .proof { grid-template-columns: 1fr; } }
+
+  .quote {
+    margin-top: 56px;
+    padding: 56px;
+    border: 1px solid var(--line-2); border-radius: 20px;
+    background:
+      radial-gradient(ellipse 80% 80% at 0% 0%, color-mix(in oklab, var(--gold-1) 14%, transparent), transparent 60%),
+      rgba(30, 20, 8, 0.5);
+    backdrop-filter: blur(14px);
+  }
+  .quote blockquote {
+    font-family: var(--serif); font-style: italic;
+    font-size: clamp(26px, 2.8vw, 38px);
+    line-height: 1.28; letter-spacing: -0.01em;
+    margin: 0; color: var(--ink); text-wrap: balance;
+    max-width: 26ch;
+  }
+  .quote .cite {
+    margin-top: 32px; font-family: var(--mono); font-size: 11.5px;
+    color: var(--ink-3); display: flex; align-items: center; gap: 12px;
+    letter-spacing: 0.04em;
+  }
+  .quote .cite .av {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, var(--gold-1), var(--gold-3));
+  }
+
+  /* ——————————————— CONTACT */
+  .contact { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+  .contact h2 {
+    font-family: var(--sans); font-weight: 300;
+    font-size: clamp(40px, 5.5vw, 80px);
+    line-height: 0.98; letter-spacing: -0.035em;
+    margin: 0; text-wrap: balance; max-width: 14ch; color: var(--ink);
+  }
+  .contact h2 .serif {
+    font-family: var(--serif); font-style: italic; font-weight: 400;
+    background: linear-gradient(180deg, #fff3cc 0%, var(--gold-1) 50%, var(--gold-2) 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .contact-lead { color: var(--ink-2); font-size: 17px; line-height: 1.6; margin-top: 28px; max-width: 50ch; }
+  .contact-meta { margin-top: 44px; border-top: 1px solid var(--line); }
+  .contact-meta .row {
+    display: flex; justify-content: space-between;
+    padding: 16px 0; border-bottom: 1px solid var(--line);
+    font-family: var(--mono); font-size: 12.5px;
+  }
+  .contact-meta .row .k { color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.08em; font-size: 10.5px; align-self: center; }
+  .contact-meta .row .v { color: var(--ink); }
+
+  .form {
+    border: 1px solid var(--line-2); border-radius: 20px;
+    padding: 36px;
+    background:
+      radial-gradient(ellipse 80% 60% at 100% 0%, color-mix(in oklab, var(--gold-1) 10%, transparent), transparent 70%),
+      rgba(30, 20, 8, 0.55);
+    backdrop-filter: blur(16px);
+  }
+  .form-row { margin-bottom: 22px; }
+  .form-row label {
+    font-family: var(--mono); font-size: 10.5px; color: var(--ink-3);
+    text-transform: uppercase; letter-spacing: 0.1em;
+    display: block; margin-bottom: 8px;
+  }
+  .form-row input, .form-row select, .form-row textarea {
+    width: 100%;
+    background: rgba(255,220,160,0.03); color: var(--ink);
+    border: 1px solid var(--line-2); border-radius: 10px;
+    padding: 13px 15px; font: inherit; font-size: 14px;
+    font-family: var(--sans);
+    transition: border-color .15s, background .15s;
+  }
+  .form-row input:focus, .form-row select:focus, .form-row textarea:focus {
+    outline: 0; border-color: var(--accent);
+    background: rgba(255,220,160,0.05);
+  }
+  .form-row textarea { min-height: 110px; resize: vertical; }
+  .form-row.two { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-row.two > div { margin: 0; }
+  .form .submit {
+    width: 100%; justify-content: center; padding: 15px;
+    font-size: 14px; font-weight: 500;
+    border-radius: 999px;
+    color: #2a1a08;
+    background: linear-gradient(180deg, #fff3cc 0%, var(--gold-1) 40%, var(--gold-2) 100%);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.7),
+      inset 0 -10px 14px rgba(140, 85, 25, .4),
+      0 12px 32px color-mix(in oklab, var(--gold-2) 40%, transparent);
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .form-note { font-family: var(--mono); font-size: 10.5px; color: var(--ink-3); margin-top: 14px; text-align: center; letter-spacing: 0.04em; }
+  @media (max-width: 860px) { .contact { grid-template-columns: 1fr; gap: 36px; } }
+
+  /* ——————————————— FOOTER */
+  footer { padding: 80px 0 48px; border-top: 1px solid var(--line); }
+  .foot {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    flex-wrap: wrap; gap: 32px;
+  }
+  .foot-big {
+    font-family: var(--sans); font-weight: 300;
+    font-size: clamp(64px, 13vw, 200px);
+    line-height: 0.88; letter-spacing: -0.055em;
+    color: var(--ink);
+  }
+  .foot-big .serif {
+    font-family: var(--serif); font-style: italic; font-weight: 400;
+    background: linear-gradient(180deg, #fff3cc 0%, var(--gold-1) 50%, var(--gold-2) 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .foot-meta {
+    font-family: var(--mono); font-size: 11.5px; color: var(--ink-3);
+    display: flex; flex-direction: column; gap: 8px; text-align: right; letter-spacing: 0.04em;
+  }
+  .foot-meta .ok { color: var(--accent); }
+  @media (max-width: 640px) { .foot-meta { text-align: left; } }
+
+  /* ——————————————— TWEAKS */
+  .tweaks {
+    position: fixed; right: 20px; bottom: 20px;
+    width: 300px;
+    background: rgba(30, 20, 8, 0.9);
+    border: 1px solid var(--line-2);
+    border-radius: 16px; padding: 18px;
+    font-family: var(--mono); font-size: 12px;
+    z-index: 100;
+    backdrop-filter: blur(24px);
+    box-shadow: 0 30px 80px rgba(0,0,0,.6);
+    display: none;
+  }
+  .tweaks.open { display: block; }
+  .tweaks h5 {
+    margin: 0 0 14px; font-size: 10.5px; color: var(--ink-3);
+    text-transform: uppercase; letter-spacing: 0.12em;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .tweaks h5 .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 8px var(--accent); }
+  .tweaks .grp { margin-bottom: 16px; }
+  .tweaks .grp-label {
+    font-size: 10px; color: var(--ink-3); text-transform: uppercase;
+    letter-spacing: 0.08em; margin-bottom: 8px;
+  }
+  .tweaks .swatches { display: flex; gap: 6px; }
+  .tweaks .sw { width: 30px; height: 30px; border-radius: 8px; cursor: pointer; border: 2px solid transparent; transition: transform .12s; }
+  .tweaks .sw:hover { transform: scale(1.08); }
+  .tweaks .sw.active { border-color: var(--ink); }
+  .tweaks .toggle-row {
+    display: flex; gap: 4px;
+    background: rgba(0,0,0,0.3); border: 1px solid var(--line);
+    border-radius: 8px; padding: 3px;
+  }
+  .tweaks .toggle-row button { flex: 1; padding: 7px 8px; border-radius: 5px; font-size: 10.5px; color: var(--ink-2); text-transform: uppercase; letter-spacing: 0.08em; }
+  .tweaks .toggle-row button.active { background: var(--accent); color: #2a1a08; }
+  .tweaks textarea {
+    width: 100%; background: rgba(0,0,0,0.3); color: var(--ink);
+    border: 1px solid var(--line); border-radius: 8px;
+    padding: 8px; font: inherit; font-size: 11.5px; resize: vertical;
+    min-height: 52px; font-family: var(--mono);
+  }
+</style>
+</head>
+<body data-screen-label="Jozef AI Home" data-mood="golden">
+
+<!-- Misty forest still + animated mist layers (cross-origin video blocked in sandbox) -->
+<div class="bg-photo"></div>
+<div class="mist-layer"></div>
+<div class="mist-layer b"></div>
+<div class="bg-tint"></div>
+<div class="bg-vignette"></div>
+<div class="sun"></div>
+
+<!-- Cliff walls framing the waterfall -->
+<div class="cliffs" aria-hidden="true">
+  <svg viewBox="0 0 1600 1000" preserveAspectRatio="none">
+    <defs>
+      <linearGradient id="gCliff" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#1a1005" stop-opacity="0.95"/>
+        <stop offset="100%" stop-color="#050300" stop-opacity="1"/>
+      </linearGradient>
+    </defs>
+    <!-- Left cliff -->
+    <path d="M0,0 L0,1000 L560,1000 L540,820 L580,700 L520,580 L560,460 L500,340 L540,220 L480,120 L520,40 L460,0 Z" fill="url(#gCliff)"/>
+    <!-- Right cliff -->
+    <path d="M1600,0 L1600,1000 L1040,1000 L1060,820 L1020,700 L1080,580 L1040,460 L1100,340 L1060,220 L1120,120 L1080,40 L1140,0 Z" fill="url(#gCliff)"/>
+  </svg>
+</div>
+
+<!-- Waterfall column -->
+<div class="fall-glow"></div>
+<div class="falls" aria-hidden="true">
+  <div class="fall-stream"></div>
+  <div class="fall-stream b"></div>
+  <div class="fall-stream c"></div>
+</div>
+
+<!-- Rising mist clouds at the base -->
+<div class="basin" id="basin" aria-hidden="true"></div>
+
+<!-- Drifting horizontal mist bands -->
+<div class="mist mist-1"></div>
+<div class="mist mist-2"></div>
+
+<div class="grain"></div>
+
+<!-- ——————————————— NAV -->
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="#top">
+      <span class="brand-mark"></span>
+      Jozef<span style="color:var(--ink-3);font-weight:400;">·</span>AI
+    </a>
+    <nav class="nav-links">
+      <a href="#services" class="active">Services</a>
+      <a href="#work">Work</a>
+      <a href="#process">Process</a>
+      <a href="#proof">Proof</a>
+    </nav>
+    <a class="nav-cta" href="#contact">Book a call</a>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ——————————————— HERO -->
+<section class="hero">
+  <div class="wrap">
+    <span class="hero-kicker">
+      <span class="pulse"></span>
+      Accepting 2 engagements · Q2 2026
+    </span>
+
+    <h1 id="headline">
+      <span id="hl-1">Your workflow.</span><br/>
+      <span id="hl-2">One golden <span class="serif">system.</span></span>
+    </h1>
+
+    <p class="hero-sub">
+      Jozef AI is a small, senior studio building custom agentic systems for operations-heavy businesses. We write the code, plug into your stack, and leave you with something that pays for itself — not a demo that gathers dust.
+    </p>
+
+    <div class="hero-cta-row">
+      <a class="btn-glossy btn" href="#contact">Start a project <span class="arrow">→</span></a>
+      <a class="btn-ghost btn" href="#work">See selected work</a>
+    </div>
+
+    <div class="hero-meta">
+      <div class="cell"><div class="label">Minimum engagement</div><div class="val">$5,000<span class="unit"> USD</span></div></div>
+      <div class="cell"><div class="label">Avg. time-to-ship</div><div class="val">21<span class="unit"> days</span></div></div>
+      <div class="cell"><div class="label">Hours reclaimed / wk</div><div class="val">~40<span class="unit"> /client</span></div></div>
+      <div class="cell"><div class="label">Retention after pilot</div><div class="val">92<span class="unit"> %</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ——————————————— LOGO STRIP -->
+<div class="logostrip">
+  <div class="wrap">
+    <div class="label">Trusted by teams at</div>
+    <div class="logostrip-logos">
+      <span class="logo">Northbound</span>
+      <span class="logo sans">KESTREL</span>
+      <span class="logo">Lune &amp; Co.</span>
+      <span class="logo mono">paloma/growth</span>
+      <span class="logo">Arc Compliance</span>
+      <span class="logo sans">BEACON</span>
+    </div>
+  </div>
+</div>
+
+<!-- ——————————————— SERVICES -->
+<section id="services" class="bordered">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-label">01 — Services</div>
+      <h2 class="sec-title">Custom code. <em>Built for the long run.</em></h2>
+    </div>
+    <div class="services">
+      <div class="service"><div class="service-num">
+</div><h3>Agentic <em>workflows</em></h3><p>Multi-step agents that handle the repetitive ops work — research, triage, outreach, data entry — with human checkpoints where they matter.</p><ul><li>LangGraph + Temporal</li><li>Eval suites + observability</li><li>Slack / email / CRM hooks</li></ul></div>
+      <div class="service"><div class="service-num">
+</div><h3>Internal <em>copilots</em></h3><p>Domain-tuned assistants that live inside your team's tools — trained on your docs, wired to your APIs, scoped to your permissions.</p><ul><li>RAG over your data</li><li>SSO + audit logs</li><li>Slack, Notion, custom UI</li></ul></div>
+      <div class="service"><div class="service-num">
+</div><h3>Data &amp; <em>evals</em></h3><p>The unglamorous plumbing that makes agents reliable: clean datasets, continuous evals, and monitoring that flags drift before customers do.</p><ul><li>Pipeline design + ETL</li><li>Golden-set evaluation</li><li>Cost + latency dashboards</li></ul></div>
+      <div class="service"><div class="service-num">
+</div><h3>Voice <em>agents</em></h3><p>Real-time voice agents that take calls, book appointments, and route exceptions to humans. Latency tuned, barge-in ready, Twilio native.</p><ul><li>&lt; 400ms round-trip</li><li>Custom ASR + TTS</li><li>Transcripts + analytics</li></ul></div>
+      <div class="service"><div class="service-num">
+</div><h3>Rapid <em>prototypes</em></h3><p>Two-week sprints to de-risk an idea. You get a working system, a demo, and an honest writeup of what to build and what to drop.</p><ul><li>2-week sprint, fixed fee</li><li>Working prototype + repo</li><li>Build / kill recommendation</li></ul></div>
+      <div class="service"><div class="service-num">
+</div><h3>Operate &amp; <em>improve</em></h3><p>Keep us on retainer once something's live. We run on-call, ship weekly improvements, and translate metrics into the next bet.</p><ul><li>SLAs + on-call rotation</li><li>Weekly iteration cycle</li><li>Monthly exec readout</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- ——————————————— WORK -->
+<section id="work" class="bordered">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-label">02 — Selected work</div>
+      <h2 class="sec-title">Shipped. In production. <em>Earning their keep.</em></h2>
+    </div>
+    <div class="work-list">
+      <div class="work-row" data-ph="NORTHBOUND · CLAIMS TRIAGE"><div class="work-num">01</div><div class="work-title">Northbound <span class="serif">Claims</span></div><div class="work-desc">Insurance claims triage agent — reduced manual review from 11 min to 42 sec per file.</div><div class="work-tag">Insurance · Ops</div><div class="work-arrow">→</div></div>
+      <div class="work-row" data-ph="KESTREL · VOICE INTAKE"><div class="work-num">02</div><div class="work-title">Kestrel <span class="serif">Legal</span></div><div class="work-desc">Voice agent for intake calls — handles 70% of after-hours leads end-to-end.</div><div class="work-tag">Legal · Voice</div><div class="work-arrow">→</div></div>
+      <div class="work-row" data-ph="LUNE &amp; CO. · MERCH COPILOT"><div class="work-num">03</div><div class="work-title">Lune &amp; <span class="serif">Co.</span></div><div class="work-desc">Internal copilot for merchandisers — drafts POs, flags inventory risk, writes weekly vendor notes.</div><div class="work-tag">Retail · Copilot</div><div class="work-arrow">→</div></div>
+      <div class="work-row" data-ph="PALOMA · OUTBOUND RESEARCH"><div class="work-num">04</div><div class="work-title">Paloma <span class="serif">Growth</span></div><div class="work-desc">Outbound research agent that enriches accounts and drafts first-touch — 3.4× reply rate in pilot.</div><div class="work-tag">B2B · Growth</div><div class="work-arrow">→</div></div>
+      <div class="work-row" data-ph="ARC · EVAL HARNESS"><div class="work-num">05</div><div class="work-title">Arc <span class="serif">Compliance</span></div><div class="work-desc">Eval harness + red-team suite for a regulated-industry chatbot — cut hallucinations by 83%.</div><div class="work-tag">Fintech · Safety</div><div class="work-arrow">→</div></div>
+      <div class="work-row" data-ph="BEACON · DISPATCH AGENT"><div class="work-num">06</div><div class="work-title">Beacon <span class="serif">Field</span></div><div class="work-desc">Dispatch agent for HVAC techs — routes jobs, pulls parts, texts customers. Saves dispatch 30 hrs/wk.</div><div class="work-tag">Field ops · Agent</div><div class="work-arrow">→</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="work-preview" id="work-preview"><div class="ph" id="work-preview-ph">preview</div></div>
+
+<!-- ——————————————— PROCESS -->
+<section id="process" class="bordered">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-label">03 — Process</div>
+      <h2 class="sec-title">24 Hours to something real. <em>No slide decks.</em></h2>
+    </div>
+    <div class="process">
+      <div>
+        <div class="step"><div class="step-num">01</div><div><h4>Map the <em>workflow</em></h4><p>We sit with the team doing the work, trace the real process end-to-end, and quantify what it costs today — in hours, errors, and missed revenue.</p><div class="step-time">WEEK 1</div></div></div>
+        <div class="step"><div class="step-num">02</div><div><h4>Prototype the <em>thin slice</em></h4><p>We build the narrowest version of the agent that proves the value. Not a demo — something your team uses for real work, under supervision.</p><div class="step-time">WEEK 2</div></div></div>
+        <div class="step"><div class="step-num">03</div><div><h4>Harden &amp; <em>evaluate</em></h4><p>Golden-set evals, observability, guardrails, and the boring-but-critical failure modes. We don't ship anything that can't be measured.</p><div class="step-time">WEEK 3</div></div></div>
+        <div class="step"><div class="step-num">04</div><div><h4>Deploy &amp; <em>hand over</em></h4><p>Production rollout, team training, and a clean repo with docs. You own the code. We stick around on retainer if you want ongoing iteration.</p><div class="step-time">WEEK 4</div></div></div>
+      </div>
+
+      <div class="console" aria-hidden="true">
+        <div class="console-bar"><span class="bulb"></span><span class="bulb"></span><span class="bulb"></span><span class="title">~/jozef/run.sh</span></div>
+        <div class="console-body">
+          <div><span class="prompt">›</span> <span class="hi">jozef init</span> <span class="muted">--client "your-co"</span></div>
+          <div>&nbsp;&nbsp;↳ scoping call scheduled</div>
+          <div>&nbsp;&nbsp;↳ NDA + SOW sent</div>
+          <div>&nbsp;</div>
+          <div><span class="prompt">›</span> <span class="hi">jozef build</span> <span class="muted">--sprint 2w</span></div>
+          <div>&nbsp;&nbsp;<span class="ok">✓</span> agent scaffold</div>
+          <div>&nbsp;&nbsp;<span class="ok">✓</span> eval suite (N=240)</div>
+          <div>&nbsp;&nbsp;<span class="ok">✓</span> slack + CRM hooks</div>
+          <div>&nbsp;&nbsp;<span class="ok">✓</span> observability wired</div>
+          <div>&nbsp;</div>
+          <div><span class="prompt">›</span> <span class="hi">jozef ship</span> <span class="muted">--to production</span></div>
+          <div>&nbsp;&nbsp;status: <span class="ok">LIVE</span></div>
+          <div>&nbsp;&nbsp;p50 latency: 320ms · accuracy: 96.4%</div>
+          <div>&nbsp;&nbsp;hours saved / wk: 38.2</div>
+          <div>&nbsp;</div>
+          <div><span class="prompt">›</span> <span class="console-cursor"></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ——————————————— PROOF -->
+<section id="proof" class="bordered">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-label">04 — Proof</div>
+      <h2 class="sec-title">The numbers we care about. <em>Yours too.</em></h2>
+    </div>
+    <div class="proof">
+      <div class="proof-cell"><div class="big">$4.2<span class="unit">M</span></div><div class="label">Operating cost removed · trailing 12mo</div><div class="desc">Fully-loaded headcount hours automated, net of system cost. We audit this quarterly with the client.</div></div>
+      <div class="proof-cell"><div class="big">14<span class="unit"> days</span></div><div class="label">Median prototype → production</div><div class="desc">From kickoff to first live traffic. We don't count the scoping phase because you shouldn't pay for it.</div></div>
+      <div class="proof-cell"><div class="big">96.4<span class="unit">%</span></div><div class="label">Avg. eval accuracy at ship</div><div class="desc">On client-defined golden sets. We publish the methodology and the full eval report with every handover.</div></div>
+      <div class="proof-cell"><div class="big">86<span class="unit">%</span></div><div class="label">Retain us after pilot</div><div class="desc">Teams keep us on to extend the system, not just maintain it.</div></div>
+    </div>
+
+    <div class="quote">
+      <blockquote>Jozef Ai delivered something we'd spent nine months failing to build in-house — in one week, for less than a single engineer's quarterly cost.</blockquote>
+      <div class="cite"><span class="av"></span><span>COO · Series B fintech · under NDA</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ——————————————— CONTACT -->
+<section id="contact" class="bordered">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-label">05 — Start</div>
+      <h2 class="sec-title">Bring us a workflow. <em>We'll bring a system.</em></h2>
+    </div>
+
+    <div class="contact">
+      <div>
+        <h2>Let's talk <span class="serif">specifics.</span></h2>
+        <p class="contact-lead">Tell us the workflow, the pain, and roughly what it costs you. If we think we can help, you'll hear back within a business day with a scoping call on the calendar. If we can't, we'll tell you that too — and point you to someone who can.</p>
+        <div class="contact-meta">
+          <div class="row"><span class="k">Principal</span><span class="v">Cornelis / Jozef</span></div>
+          <div class="row"><span class="k">Minimum</span><span class="v">USD 5,000</span></div>
+          <div class="row"><span class="k">Timezone</span><span class="v">GMT+1 · flexible</span></div>
+          <div class="row"><span class="k">Email</span><span class="v">josefbasie2023@gmail.com
+
+</span></div>
+          <div class="row"><span class="k">Booked thru</span><span class="v">July 2026</span></div>
+        </div>
+      </div>
+
+      <form class="form" onsubmit="event.preventDefault(); const b=this.querySelector('.submit'); b.textContent='Sent — we\\'ll be in touch ✓';">
+        <div class="form-row two">
+          <div><label>Your name</label><input type="text" placeholder="Jane Doe" /></div>
+          <div><label>Company</label><input type="text" placeholder="Acme Inc." /></div>
+        </div>
+        <div class="form-row"><label>Work email</label><input type="email" placeholder="jane@acme.com" /></div>
+        <div class="form-row two">
+          <div><label>Budget</label><select><option>$5k – $15k · prototype</option><option>$15k – $50k · build</option><option>$50k+ · build + operate</option><option>Not sure yet</option></select></div>
+          <div><label>Timeline</label><select><option>ASAP</option><option>Within a month</option><option>Next quarter</option><option>Exploring</option></select></div>
+        </div>
+        <div class="form-row"><label>What workflow are we automating?</label><textarea placeholder="One paragraph is enough. Mention the process, the team doing it today, and roughly how many hours a week it eats."></textarea></div>
+        <button type="submit" class="submit">Send brief <span class="arrow">→</span></button>
+        <div class="form-note">
+</div>
+      </form>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div class="foot-big">Jozef<span class="serif">·AI</span></div>
+    <div class="foot-meta">
+      <div>© 2026 Jozef AI</div>
+      <div>Built by Cornelis</div>
+      <div>josefbasie2023@gmail.com
+
+</div>
+      <div class="ok">● systems operational</div>
+    </div>
+  </div>
+</footer>
+
+<div class="tweaks" id="tweaks">
+  <h5>TWEAKS <span class="dot"></span></h5>
+  <div class="grp">
+    <div class="grp-label">Accent</div>
+    <div class="swatches" id="sw-accent">
+      <div class="sw" data-accent="#e8b24a" style="background:#e8b24a"></div>
+      <div class="sw" data-accent="#f0a060" style="background:#f0a060"></div>
+      <div class="sw" data-accent="#c9b872" style="background:#c9b872"></div>
+      <div class="sw" data-accent="#d6954b" style="background:#d6954b"></div>
+      <div class="sw" data-accent="#f7d77a" style="background:#f7d77a"></div>
+    </div>
+  </div>
+  <div class="grp">
+    <div class="grp-label">Mood</div>
+    <div class="toggle-row" id="mood-toggle">
+      <button data-mood="golden" class="active">Golden</button>
+      <button data-mood="dusk">Dusk</button>
+      <button data-mood="sage">Sage</button>
+    </div>
+  </div>
+  <div class="grp">
+    <div class="grp-label">Headline (line 1 | line 2)</div>
+    <textarea id="headline-input"></textarea>
+  </div>
+</div>
+
+<script>
+(function(){
+  const state = { ...TWEAK_DEFAULTS };
+
+  function applyAccent(hex){ document.documentElement.style.setProperty('--accent', hex); state.accent = hex; }
+  function applyMood(name){ document.body.setAttribute('data-mood', name); state.mood = name; }
+  function applyHeadline(str){
+    const [a, b] = str.split('|');
+    if (a !== undefined) document.getElementById('hl-1').textContent = a.trim();
+    if (b !== undefined) {
+      const txt = b.trim();
+      const words = txt.split(' ');
+      const last = words.pop();
+      const head = words.join(' ');
+      document.getElementById('hl-2').innerHTML = (head ? head + ' ' : '') + '<span class="serif">' + last + '</span>';
+    }
+    state.headline = str;
+  }
+
+  applyAccent(state.accent);
+  applyMood(state.mood || 'golden');
+  applyHeadline(state.headline);
+
+  const panel = document.getElementById('tweaks');
+  const hlInput = document.getElementById('headline-input');
+  hlInput.value = state.headline;
+
+  document.querySelectorAll('#sw-accent .sw').forEach(sw => {
+    if (sw.dataset.accent.toLowerCase() === state.accent.toLowerCase()) sw.classList.add('active');
+    sw.addEventListener('click', () => {
+      document.querySelectorAll('#sw-accent .sw').forEach(s => s.classList.remove('active'));
+      sw.classList.add('active');
+      applyAccent(sw.dataset.accent);
+      post({ accent: sw.dataset.accent });
+    });
+  });
+  document.querySelectorAll('#mood-toggle button').forEach(b => {
+    b.classList.toggle('active', b.dataset.mood === state.mood);
+    b.addEventListener('click', () => {
+      document.querySelectorAll('#mood-toggle button').forEach(x => x.classList.remove('active'));
+      b.classList.add('active');
+      applyMood(b.dataset.mood);
+      post({ mood: b.dataset.mood });
+    });
+  });
+  let t;
+  hlInput.addEventListener('input', () => {
+    applyHeadline(hlInput.value);
+    clearTimeout(t);
+    t = setTimeout(() => post({ headline: hlInput.value }), 400);
+  });
+
+  function post(edits){ try { window.parent.postMessage({ type: '__edit_mode_set_keys', edits }, '*'); } catch(e){} }
+
+  window.addEventListener('message', (e) => {
+    const d = e.data || {};
+    if (d.type === '__activate_edit_mode') panel.classList.add('open');
+    if (d.type === '__deactivate_edit_mode') panel.classList.remove('open');
+  });
+  try { window.parent.postMessage({ type: '__edit_mode_available' }, '*'); } catch(e){}
+})();
+
+// Generate rising mist clouds at the basin
+(function(){
+  const basin = document.getElementById('basin');
+  if (!basin) return;
+  const N = 14;
+  for (let i = 0; i < N; i++) {
+    const c = document.createElement('div');
+    c.className = 'mist-cloud';
+    const size = 180 + Math.random() * 260;
+    const x = 15 + Math.random() * 70; // % across
+    const drift = (Math.random() * 120 - 60) + 'px';
+    const dur = 9 + Math.random() * 10;
+    const delay = -Math.random() * dur;
+    c.style.width = size + 'px';
+    c.style.height = size + 'px';
+    c.style.left = 'calc(' + x + '% - ' + (size/2) + 'px)';
+    c.style.setProperty('--x', '0px');
+    c.style.setProperty('--drift', drift);
+    c.style.animationDuration = dur + 's';
+    c.style.animationDelay = delay + 's';
+    basin.appendChild(c);
+  }
+})();
+
+(function(){
+  const preview = document.getElementById('work-preview');
+  const ph = document.getElementById('work-preview-ph');
+  const rows = document.querySelectorAll('.work-row');
+  let raf;
+  rows.forEach(row => {
+    row.addEventListener('mouseenter', () => {
+      ph.textContent = row.dataset.ph || 'preview';
+      preview.classList.add('show');
+    });
+    row.addEventListener('mouseleave', () => preview.classList.remove('show'));
+  });
+  document.addEventListener('mousemove', (e) => {
+    if (!preview.classList.contains('show')) return;
+    cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(() => {
+      preview.style.left = (e.clientX + 24) + 'px';
+      preview.style.top = (e.clientY - 110) + 'px';
+    });
+  });
+})();
+</script>
+</body>
+</html>
