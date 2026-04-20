@@ -3,7 +3,11 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Jozef AI — Your workflow. One smart system.</title>
+<title>Jozef AI — Custom agentic systems for operations-heavy businesses</title>
+<meta name="description" content="Jozef AI builds custom AI agents and automation systems that replace manual workflows. Ship in 48 hours. Fixed fee. You own the code." />
+<meta property="og:title" content="Jozef AI — Custom agentic systems" />
+<meta property="og:description" content="We build custom AI agents that replace manual workflows. Ship in 48 hours. Fixed fee. You own the code." />
+<meta property="og:type" content="website" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
@@ -821,7 +825,7 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
       <a href="#process">Process</a>
       <a href="#proof">Proof</a>
     </nav>
-    <a class="nav-cta" href="#contact">Book a call</a>
+    <a class="nav-cta" href="http://calendly.com/josefbasie2023/discovery-call" target="_blank" rel="noopener">Book a call</a>
   </div>
 </header>
 
@@ -832,7 +836,7 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
   <div class="wrap">
     <span class="hero-kicker">
       <span class="pulse"></span>
-      Accepting 2 engagements · Q2 2026
+      Accepting 2 engagements · Q3 2026
     </span>
 
     <h1 id="headline">
@@ -889,7 +893,7 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
   <div class="wrap">
     <div class="sec-head">
       <div class="sec-label">02 — Process</div>
-      <h2 class="sec-title">24 Hours to something real. <em>No slide decks.</em></h2>
+      <h2 class="sec-title">48 hours to something real. <em>No slide decks.</em></h2>
     </div>
     <div class="process">
       <div>
@@ -938,10 +942,6 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
       <div class="proof-cell"><div class="big">85<span class="unit">%</span></div><div class="label">Retain us after pilot</div><div class="desc">Teams keep us on to extend the system, not just maintain it.</div></div>
     </div>
 
-    <div class="quote">
-      <blockquote>Jozef AI delivered something we'd spent six months failing to build in-house — in three weeks, for less than a single engineer's monthly cost.</blockquote>
-      <div class="cite"><span class="av"></span><span>COO · Series B fintech · under NDA</span></div>
-    </div>
   </div>
 </section>
 
@@ -968,20 +968,19 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
         </div>
       </div>
 
-      <form class="form" onsubmit="event.preventDefault(); const b=this.querySelector('.submit'); b.textContent='Sent — we\\'ll be in touch ✓';">
+      <form class="form" action="https://formspree.io/f/josefbasie2023@gmail.com" method="POST" id="contact-form">
         <div class="form-row two">
-          <div><label>Your name</label><input type="text" placeholder="Jane Doe" /></div>
-          <div><label>Company</label><input type="text" placeholder="Acme Inc." /></div>
+          <div><label>Your name</label><input type="text" name="name" placeholder="Jane Doe" required /></div>
+          <div><label>Company</label><input type="text" name="company" placeholder="Acme Inc." /></div>
         </div>
-        <div class="form-row"><label>Work email</label><input type="email" placeholder="jane@acme.com" /></div>
+        <div class="form-row"><label>Work email</label><input type="email" name="email" placeholder="jane@acme.com" required /></div>
         <div class="form-row two">
-          <div><label>Budget</label><select><option>$5k – $15k · prototype</option><option>$15k – $50k · build</option><option>$50k+ · build + operate</option><option>Not sure yet</option></select></div>
-          <div><label>Timeline</label><select><option>ASAP</option><option>Within a month</option><option>Next quarter</option><option>Exploring</option></select></div>
+          <div><label>Budget</label><select name="budget"><option>$5k – $15k · prototype</option><option>$15k – $50k · build</option><option>$50k+ · build + operate</option><option>Not sure yet</option></select></div>
+          <div><label>Timeline</label><select name="timeline"><option>ASAP</option><option>Within a month</option><option>Next quarter</option><option>Exploring</option></select></div>
         </div>
-        <div class="form-row"><label>What workflow are we automating?</label><textarea placeholder="One paragraph is enough. Mention the process, the team doing it today, and roughly how many hours a week it eats."></textarea></div>
+        <div class="form-row"><label>What workflow are we automating?</label><textarea name="workflow" placeholder="One paragraph is enough. Mention the process, the team doing it today, and roughly how many hours a week it eats."></textarea></div>
         <button type="submit" class="submit">Send brief <span class="arrow">→</span></button>
-        <div class="form-note">
-</div>
+        <div class="form-note">We reply within 1 business day · or <a href="http://calendly.com/josefbasie2023/discovery-call" target="_blank" rel="noopener" style="color:var(--ink-2);text-decoration:underline">book a call directly</a></div>
       </form>
     </div>
   </div>
