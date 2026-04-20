@@ -825,7 +825,7 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
       <a href="#process">Process</a>
       <a href="#proof">Proof</a>
     </nav>
-    <a class="nav-cta" href="http://calendly.com/josefbasie2023/discovery-call" target="_blank" rel="noopener">Book a call</a>
+    <a class="nav-cta" href="https://calendly.com/josefbasie2023/discovery-call" target="_blank" rel="noopener">Book a call</a>
   </div>
 </header>
 
@@ -968,7 +968,7 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
         </div>
       </div>
 
-      <form class="form" action="https://formspree.io/f/josefbasie2023@gmail.com" method="POST" id="contact-form">
+      <form class="form" id="contact-form">
         <div class="form-row two">
           <div><label>Your name</label><input type="text" name="name" placeholder="Jane Doe" required /></div>
           <div><label>Company</label><input type="text" name="company" placeholder="Acme Inc." /></div>
@@ -980,7 +980,7 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
         </div>
         <div class="form-row"><label>What workflow are we automating?</label><textarea name="workflow" placeholder="One paragraph is enough. Mention the process, the team doing it today, and roughly how many hours a week it eats."></textarea></div>
         <button type="submit" class="submit">Send brief <span class="arrow">→</span></button>
-        <div class="form-note">We reply within 1 business day · or <a href="http://calendly.com/josefbasie2023/discovery-call" target="_blank" rel="noopener" style="color:var(--ink-2);text-decoration:underline">book a call directly</a></div>
+        <div class="form-note">We reply within 1 business day · or <a href="https://calendly.com/josefbasie2023/discovery-call" target="_blank" rel="noopener" style="color:var(--ink-2);text-decoration:underline">book a call directly</a></div>
       </form>
     </div>
   </div>
@@ -1111,6 +1111,35 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
     c.style.animationDelay = delay + 's';
     basin.appendChild(c);
   }
+})();
+
+// Contact form — Formspree AJAX
+(function(){
+  const form = document.getElementById('contact-form');
+  if (!form) return;
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = form.querySelector('.submit');
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+    try {
+      const res = await fetch('https://formspree.io/josefbasie2023@gmail.com', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(form)
+      });
+      if (res.ok) {
+        btn.textContent = 'Sent — we\'ll be in touch ✓';
+        form.reset();
+      } else {
+        btn.textContent = 'Something went wrong — email us directly';
+        btn.disabled = false;
+      }
+    } catch {
+      btn.textContent = 'Something went wrong — email us directly';
+      btn.disabled = false;
+    }
+  });
 })();
 
 (function(){
