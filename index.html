@@ -1123,10 +1123,11 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
     btn.textContent = 'Sending…';
     btn.disabled = true;
     try {
-      const res = await fetch('https://formspree.io/josefbasie2023@gmail.com', {
+      const data = Object.fromEntries(new FormData(form));
+      const res = await fetch('https://formsubmit.co/ajax/josefbasie2023@gmail.com', {
         method: 'POST',
-        headers: { 'Accept': 'application/json' },
-        body: new FormData(form)
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(data)
       });
       if (res.ok) {
         btn.textContent = 'Sent — we\'ll be in touch ✓';
