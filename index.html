@@ -15,7 +15,7 @@
 const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
   "accent": "#f0a060",
   "mood": "golden",
-  "headline": "Your workflow.|One golden system."
+  "headline": "We automate the workflows|costing you 20+ hours a week."
 }/*EDITMODE-END*/;
 </script>
 <style>
@@ -649,6 +649,7 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
     -webkit-background-clip: text; background-clip: text; color: transparent;
   }
   .contact-lead { color: var(--ink-2); font-size: 17px; line-height: 1.6; margin-top: 28px; max-width: 50ch; }
+  .contact-bio { color: var(--ink-3); font-size: 14px; line-height: 1.6; margin-top: 16px; max-width: 50ch; }
   .contact-meta { margin-top: 44px; border-top: 1px solid var(--line); }
   .contact-meta .row {
     display: flex; justify-content: space-between;
@@ -840,8 +841,8 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
     </span>
 
     <h1 id="headline">
-      <span id="hl-1">Your workflow.</span><br/>
-      <span id="hl-2">One golden <span class="serif">system.</span></span>
+      <span id="hl-1">We automate the workflows</span><br/>
+      <span id="hl-2">costing you 20+ hours a <span class="serif">week.</span></span>
     </h1>
 
     <p class="hero-sub">
@@ -849,7 +850,7 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
     </p>
 
     <div class="hero-cta-row">
-      <a class="btn-glossy btn" href="#contact">Start a project <span class="arrow">→</span></a>
+      <a class="btn-glossy btn" href="#contact">Book a scoping call <span class="arrow">→</span></a>
       <a class="btn-ghost btn" href="#process">See how it works</a>
     </div>
 
@@ -897,10 +898,10 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
     </div>
     <div class="process">
       <div>
-        <div class="step"><div class="step-num">01</div><div><h4>Map the <em>workflow</em></h4><p>We sit with the team doing the work, trace the real process end-to-end, and quantify what it costs today — in hours, errors, and missed revenue.</p><div class="step-time">WEEK 1</div></div></div>
-        <div class="step"><div class="step-num">02</div><div><h4>Prototype the <em>thin slice</em></h4><p>We build the narrowest version of the agent that proves the value. Not a demo — something your team uses for real work, under supervision.</p><div class="step-time">WEEK 2</div></div></div>
-        <div class="step"><div class="step-num">03</div><div><h4>Harden &amp; <em>evaluate</em></h4><p>Golden-set evals, observability, guardrails, and the boring-but-critical failure modes. We don't ship anything that can't be measured.</p><div class="step-time">WEEK 3</div></div></div>
-        <div class="step"><div class="step-num">04</div><div><h4>Deploy &amp; <em>hand over</em></h4><p>Production rollout, team training, and a clean repo with docs. You own the code. We stick around on retainer if you want ongoing iteration.</p><div class="step-time">WEEK 4</div></div></div>
+        <div class="step"><div class="step-num">01</div><div><h4>Map the <em>workflow</em></h4><p>We sit with the team doing the work, trace the real process end-to-end, and quantify what it costs today — in hours, errors, and missed revenue.</p><div class="step-time">PHASE 01</div></div></div>
+        <div class="step"><div class="step-num">02</div><div><h4>Prototype the <em>thin slice</em></h4><p>We build the narrowest version of the agent that proves the value. Not a demo — something your team uses for real work, under supervision.</p><div class="step-time">PHASE 02</div></div></div>
+        <div class="step"><div class="step-num">03</div><div><h4>Harden &amp; <em>evaluate</em></h4><p>Golden-set evals, observability, guardrails, and the boring-but-critical failure modes. We don't ship anything that can't be measured.</p><div class="step-time">PHASE 03</div></div></div>
+        <div class="step"><div class="step-num">04</div><div><h4>Deploy &amp; <em>hand over</em></h4><p>Production rollout, team training, and a clean repo with docs. You own the code. We stick around on retainer if you want ongoing iteration.</p><div class="step-time">PHASE 04</div></div></div>
       </div>
 
       <div class="console" aria-hidden="true">
@@ -928,28 +929,11 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
   </div>
 </section>
 
-<!-- ——————————————— PROOF -->
-<section id="proof" class="bordered">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="sec-label">03 — Proof</div>
-      <h2 class="sec-title">The numbers we care about. <em>Yours too.</em></h2>
-    </div>
-    <div class="proof">
-      <div class="proof-cell"><div class="big">$640<span class="unit">K</span></div><div class="label">Client operating cost removed · trailing 12mo</div><div class="desc">Fully-loaded headcount hours automated, net of system cost. We audit this with each client quarterly.</div></div>
-      <div class="proof-cell"><div class="big">7<span class="unit"> days</span></div><div class="label">Median prototype → production</div><div class="desc">From kickoff to first live traffic. We don't count the scoping phase because you shouldn't pay for it.</div></div>
-      <div class="proof-cell"><div class="big">94<span class="unit">%</span></div><div class="label">Avg. eval accuracy at ship</div><div class="desc">On client-defined golden sets. We publish the methodology and the full eval report with every handover.</div></div>
-      <div class="proof-cell"><div class="big">85<span class="unit">%</span></div><div class="label">Retain us after pilot</div><div class="desc">Teams keep us on to extend the system, not just maintain it.</div></div>
-    </div>
-
-  </div>
-</section>
-
 <!-- ——————————————— CONTACT -->
 <section id="contact" class="bordered">
   <div class="wrap">
     <div class="sec-head">
-      <div class="sec-label">04 — Start</div>
+      <div class="sec-label">03 — Start</div>
       <h2 class="sec-title">Bring us a workflow. <em>We'll bring a system.</em></h2>
     </div>
 
@@ -957,6 +941,7 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
       <div>
         <h2>Let's talk <span class="serif">specifics.</span></h2>
         <p class="contact-lead">Tell us the workflow, the pain, and roughly what it costs you. If we think we can help, you'll hear back within a business day with a scoping call on the calendar. If we can't, we'll tell you that too — and point you to someone who can.</p>
+        <p class="contact-bio">I'm Cornelis — sole operator, based in GMT+1. I write the code, run the engagement, and stay on after delivery. No account managers, no handoffs.</p>
         <div class="contact-meta">
           <div class="row"><span class="k">Principal</span><span class="v">Cornelis / Jozef</span></div>
           <div class="row"><span class="k">Minimum</span><span class="v">USD 5,000</span></div>
@@ -964,22 +949,14 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
           <div class="row"><span class="k">Email</span><span class="v">josefbasie2023@gmail.com
 
 </span></div>
-          <div class="row"><span class="k">Booked thru</span><span class="v">July 2026</span></div>
         </div>
       </div>
 
       <form class="form" id="contact-form">
-        <div class="form-row two">
-          <div><label>Your name</label><input type="text" name="name" placeholder="Jane Doe" required /></div>
-          <div><label>Company</label><input type="text" name="company" placeholder="Acme Inc." /></div>
-        </div>
+        <div class="form-row"><label>Your name</label><input type="text" name="name" placeholder="Jane Doe" required /></div>
         <div class="form-row"><label>Work email</label><input type="email" name="email" placeholder="jane@acme.com" required /></div>
-        <div class="form-row two">
-          <div><label>Budget</label><select name="budget"><option>$5k – $15k · prototype</option><option>$15k – $50k · build</option><option>$50k+ · build + operate</option><option>Not sure yet</option></select></div>
-          <div><label>Timeline</label><select name="timeline"><option>ASAP</option><option>Within a month</option><option>Next quarter</option><option>Exploring</option></select></div>
-        </div>
-        <div class="form-row"><label>What workflow are we automating?</label><textarea name="workflow" placeholder="One paragraph is enough. Mention the process, the team doing it today, and roughly how many hours a week it eats."></textarea></div>
-        <button type="submit" class="submit">Send brief <span class="arrow">→</span></button>
+        <div class="form-row"><label>Describe the workflow</label><textarea name="workflow" placeholder="What's the process, who does it today, and roughly how many hours a week does it cost?" required></textarea></div>
+        <button type="submit" class="submit">Send <span class="arrow">→</span></button>
         <div class="form-note">We reply within 1 business day · or <a href="https://calendly.com/josefbasie2023/discovery-call" target="_blank" rel="noopener" style="color:var(--ink-2);text-decoration:underline">book a call directly</a></div>
       </form>
     </div>
