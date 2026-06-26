@@ -5,7 +5,8 @@ Each folder is a complete snapshot of the site at a point in time.
 | Name   | Date       | Status  | Description                                                      |
 |--------|------------|---------|------------------------------------------------------------------|
 | MAIN   | 2026-05-30 | archived | Original generic agency design — golden/dark theme, misty forest bg |
-| HVAC   | 2026-05-30 | **active** | HVAC-targeted copy — loss-aversion headline, $800/job pain stats, crawlspace line, "Show me what I'm losing" CTA |
+| HVAC   | 2026-05-30 | archived | HVAC-targeted copy — loss-aversion headline, $800/job pain stats, crawlspace line, "Show me what I'm losing" CTA |
+| Solar  | 2026-06-26 | **active** | Solar-targeted copy — $28,000/job pain stats, "solar owners" throughout, same structure as HVAC variant |
 
 ---
 
